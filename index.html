@@ -647,9 +647,10 @@
 
             </div> -->
             <div class="animate" style="animation-delay: 0.9s;">
-                <form id="contact-form" class="bg-white p-8 rounded-xl shadow-sm">
+                <form action="https://api.web3forms.com/submit" method="POST" class="bg-white p-8 rounded-xl shadow-sm">
+                    <input type="hidden" name="access_key" value="064f4b3b-9618-4bca-962e-10fcfa345f25">
+
                     <div class="mb-6">
-                            <!-- <input type="hidden" name="access_key" value="064f4b3b-9618-4bca-962e-10fcfa345f25"> -->
                         <label for="name" class="block text-gray-700 font-medium mb-2">Your Name</label>
                         <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500">
                     </div>
@@ -675,9 +676,33 @@
 
         </div>
     </section>
+
 <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
 </script>
+
+<script>
+const form = document.querySelector("form");
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const data = new FormData(form);
+
+    fetch(form.action, {
+        method: "POST",
+        body: data
+    })
+    .then(response => {
+        alert("Message sent successfully!");
+        form.reset();
+    })
+    .catch(error => {
+        alert("Something went wrong!");
+    });
+});
+</script>
+
 <script type="text/javascript">
    (function(){
       emailjs.init({
